@@ -1,31 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-class App extends React.Component {
+
+class App extends Component {
  
     state = {
 
-        ip: '',
-        time: 1,
-        city: '',
-        temperature: '',
+        ip: "",
+        time: "",
+        city: "",
+        temperature: "",
         fetching: true
 
     }
 
 
     fetchWetherData = async ({city, ...data}) => {
-        console.log(city)
-        console.log(data)
 
         const id = `90063b78cbe9ba03b7a25507256ba316`
-        const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${id}`
+        const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${id}`
         
-        const response = await fetch(url)
-        const waData = await response.json()
+        fetch(url)
+            .then(response => response.json())
+            .then(waData => {
 
-        console.log(waData)
+                const date = new Date()
+                const time = date.getHours()
+
+                this.setState({
+                        ip: data.ip,
+                        time,
+                        city,
+                        temperature: waData.main.temp,
+                        fetching: false
+                    })
+                
+            })
+
         
     }
 
@@ -43,18 +55,22 @@ class App extends React.Component {
     }
 
     render() {
+        
+        const { ip, time, city, temperature, fetching } = this.state
 
-        return (
-        <div className="App">
-            <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-                App for know weather in your city - 
-            </p>
-            
-            </header>
-        </div>
-        )
+        return  fetching ? 
+            <div className="waiting">Loading...</div>
+            :
+            <div className="App">
+                <header className="App-header">
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <h1>App for know weather in your city</h1>
+                    <p>Your city is { city }</p>
+                    <p>Now it's { time } o'clock and { temperature }С°</p>
+                    <small>{ ip }</small>     
+                </header>
+            </div>
+
     } 
 }
 
