@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Hero from './components/Hero.js'
+import WeatherDetails from './components/WeatherDetails'
+import Form from './components/Form'
+
 
 
 class App extends Component {
  
     state = {
 
-        ip: "",
         time: "",
         city: "",
         temperature: "",
-        fetching: true
+        fetching: true,
+        error: undefined
 
     }
 
 
-    fetchWetherData = async ({city, ...data}) => {
+    fetchWetherData = async ({city, ...geoData}) => {
+        console.log(city)
+        console.log(geoData)
 
         const id = `90063b78cbe9ba03b7a25507256ba316`
         const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${id}`
@@ -28,8 +33,9 @@ class App extends Component {
                 const date = new Date()
                 const time = date.getHours()
 
+                console.log(waData)
+                
                 this.setState({
-                        ip: data.ip,
                         time,
                         city,
                         temperature: waData.main.temp,
@@ -37,12 +43,41 @@ class App extends Component {
                     })
                 
             })
+ 
+    }
+
+    customFeching = async (event) => {
+
+        event.preventDefault()
+        const city = event.target.elements.city.value
+
+        const id = `90063b78cbe9ba03b7a25507256ba316`
+        const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${id}`
+       
+        try {
+            const response = await fetch(url)
+            const data = await response.json()
+
+            this.setState({
+                city,
+                temperature: data.main.temp,
+                fetching: false
+            })
+        } catch(err) {
+
+            console.log(err)
+            this.setState({
+                error: 'Cant find this city. Please try agan'
+            })
+            return err
+        }
 
         
     }
 
     componentDidMount() {
         this.fetchIP()
+
     }
 
     fetchIP = () => {
@@ -56,20 +91,22 @@ class App extends Component {
 
     render() {
         
-        const { ip, time, city, temperature, fetching } = this.state
+        const { time, city, temperature, fetching, error } = this.state
+      
 
         return  fetching ? 
-            <div className="waiting">Loading...</div>
+
+                <section className="App-wrapper" data-bg={time}>
+                    <div className="waiting">Loading...</div>
+                </section>   
             :
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1>App for know weather in your city</h1>
-                    <p>Your city is { city }</p>
-                    <p>Now it's { time } o'clock and { temperature }С°</p>
-                    <small>{ ip }</small>     
-                </header>
-            </div>
+                <section className="App-wrapper" data-bg={time}>
+
+                    <WeatherDetails city={city} temperature={temperature} />
+                    <Hero localtime={time} />
+                    <Form weatherMetod={this.customFeching} error={error}/>
+                   
+                </section>
 
     } 
 }

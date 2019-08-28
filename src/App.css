@@ -1,15 +1,8 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
 
-.App-header {
+.App-wrapper {
   background-color: #282c34;
+  text-align: center;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -17,17 +10,85 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+
 }
 
-.App-link {
-  color: #61dafb;
+[data-bg='5'],
+[data-bg='6'],
+[data-bg='7'],
+[data-bg='8'],
+[data-bg='9'],
+[data-bg='10'],
+[data-bg='11'] {
+  background: url('./img/bg-morning.jpg') center 100% no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover; 
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+[data-bg='12'],
+[data-bg='13'],
+[data-bg='14'],
+[data-bg='15'],
+[data-bg='16'],
+[data-bg='17'],
+[data-bg='18'],
+[data-bg='19'],
+[data-bg='20'],
+[data-bg='21'] {
+  background: url('./img/bg-evening.jpg') center 100% no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover; 
+}
+
+[data-bg='22'],
+[data-bg='23'],
+[data-bg='24'],
+[data-bg='0'],
+[data-bg='1'],
+[data-bg='2'],
+[data-bg='3'],
+[data-bg='4'] {
+  background: url('./img/bg-night.jpg') center 100% no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover; 
+}
+
+
+
+.form-input {
+  width: 500px;
+  height: 40px;
+  font-size: 24px;
+  padding: 10px;
+  text-align: center;
+  border: 6px solid #ddd;
+  outline: none;
+}
+
+.form-button {
+  height: 72px;
+  font-size: 24px;
+  font-weight: 500;
+  background: #f7904c;
+  color: #333333;
+  padding: 0 20px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.5s linear;
+}
+
+.form-button:hover {
+  background: #dc732e;
+} 
+
+.weather-details-temp {
+  font-size: 100px;
+  line-height: 0;
+  font-weight: 500;
 }
