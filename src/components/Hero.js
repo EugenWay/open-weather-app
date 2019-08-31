@@ -4,7 +4,7 @@ import React from 'react'
 class Hero extends React.Component {
     render() {
         
-        const { localtime } = this.props
+        const { localtime, city } = this.props
         let welcome = ''
 
        
@@ -26,7 +26,7 @@ class Hero extends React.Component {
         }
 
 
-        return <h1>{ welcome }. Welcome back</h1>
+        return <h1>{ welcome }. Welcome to {city}</h1>
   
     }
 }

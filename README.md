@@ -1,5 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+![Image alt](https://github.com/EugenWay/open-weather-app/raw/master/src/raw/app-screen.png)
+![Image alt](https://github.com/EugenWay/open-weather-app/raw/master/src/raw/app-screen2.png)
 ## Available Scripts
 
 In the project directory, you can run:

@@ -64,9 +64,15 @@ class App extends Component {
             console.log(data)
 
             let utcTime = new Date().getUTCHours()
-            console.log(utcTime)
             let localTime = utcTime + (data.timezone / 3600)
-            console.log(localTime)
+
+            if (localTime === 24) {
+                localTime = 0
+            }
+
+            if(localTime >= 25) {
+                localTime = localTime - 24
+            }
             
             this.setState({
                 time: localTime,
@@ -132,7 +138,7 @@ class App extends Component {
                     wind={wind}
                     humidity={humidity}
                 />
-                <Hero localtime={time} />
+                <Hero localtime={time} city={city}/>
                 <Form weatherMetod={this.customFeching} error={error}/>
             </section>
         );
