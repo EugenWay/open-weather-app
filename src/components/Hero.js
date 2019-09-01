@@ -1,6 +1,6 @@
-import React from "react";
+import React, {Component} from "react";
 
-class Hero extends React.Component {
+export default class Hero extends Component {
     render() {
         const { localtime, city } = this.props;
         let welcome = "";
@@ -29,4 +29,4 @@ class Hero extends React.Component {
         );
     }
 }
-export default Hero;
+

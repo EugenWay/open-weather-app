@@ -1,7 +1,8 @@
-import React from "react";
+import React, {Component} from "react";
+
 import tempRound from "../helpers/tempRound";
 
-class WeatherDetails extends React.Component {
+export default class WeatherDetails extends Component {
     render() {
         const {
             temp,
@@ -38,6 +39,5 @@ class WeatherDetails extends React.Component {
             </section>
         );
     }
-}
+};
 
-export default WeatherDetails;
