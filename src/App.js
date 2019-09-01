@@ -20,14 +20,12 @@ class App extends Component {
     };
 
     fetchWeatherData = async ({ city, ...geoData }) => {
-
         const id = `90063b78cbe9ba03b7a25507256ba316`;
         const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${id}`;
 
         try {
-            const response = await fetch(url)
-            const waData = await response.json()
-
+            const response = await fetch(url);
+            const waData = await response.json();
 
             this.setState({
                 city,
@@ -40,13 +38,10 @@ class App extends Component {
                 icon: waData.weather[0].icon,
                 fetching: false
             });
-
-
-        } catch(err) {
-            console.log(err)
-            return err
+        } catch (err) {
+            console.log(err);
+            return err;
         }
-
     };
 
     customFeching = async event => {
@@ -61,19 +56,19 @@ class App extends Component {
 
             const data = await response.json();
 
-            console.log(data)
+            console.log(data);
 
-            let utcTime = new Date().getUTCHours()
-            let localTime = utcTime + (data.timezone / 3600)
+            let utcTime = new Date().getUTCHours();
+            let localTime = utcTime + data.timezone / 3600;
 
             if (localTime === 24) {
-                localTime = 0
+                localTime = 0;
             }
 
-            if(localTime >= 25) {
-                localTime = localTime - 24
+            if (localTime >= 25) {
+                localTime = localTime - 24;
             }
-            
+
             this.setState({
                 time: localTime,
                 city,
@@ -87,7 +82,6 @@ class App extends Component {
                 fetching: false,
                 error: undefined
             });
-
         } catch (err) {
             this.setState({
                 error: "Can't find this city. Please try again"
@@ -105,13 +99,14 @@ class App extends Component {
 
         fetch(`http://api.ipstack.com/check?access_key=${apiKey}`)
             .then(response => response.json())
-            .then(data => this.fetchWeatherData(data));
+            .then(data => this.fetchWeatherData(data))
+            .catch(error => error);
     };
 
     render() {
-        const { 
-            time, 
-            city, 
+        const {
+            time,
+            city,
             temp,
             temp_max,
             temp_min,
@@ -120,7 +115,8 @@ class App extends Component {
             description,
             icon,
             fetching,
-            error } = this.state;
+            error
+        } = this.state;
 
         return fetching ? (
             <section className="App-wrapper" data-bg={time}>
@@ -128,18 +124,18 @@ class App extends Component {
             </section>
         ) : (
             <section className="App-wrapper" data-bg={time}>
-                <WeatherDetails 
+                <WeatherDetails
                     city={city}
-                    temp={temp} 
-                    temp_max={temp_max} 
-                    temp_min={temp_min} 
-                    description={description} 
+                    temp={temp}
+                    temp_max={temp_max}
+                    temp_min={temp_min}
+                    description={description}
                     icon={icon}
                     wind={wind}
                     humidity={humidity}
                 />
-                <Hero localtime={time} city={city}/>
-                <Form weatherMetod={this.customFeching} error={error}/>
+                <Hero localtime={time} city={city} />
+                <Form weatherMetod={this.customFeching} error={error} />
             </section>
         );
     }

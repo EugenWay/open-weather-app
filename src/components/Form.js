@@ -18,7 +18,7 @@ class Form extends React.Component {
                     ></input>
                     <button className="form-button">GO</button>
                 </form>
-                <div className="error-msg">{ error }</div>
+                <div className="error-msg">{error}</div>
             </section>
         );
     }

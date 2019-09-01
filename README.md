@@ -1,5 +1,15 @@
+## Open weather application
+
+Features:
+
+-   Identify weather by current IP
+-   Identify weather for the requested city
+-   Cute change of background and greeting depending on the local time of the country or city
+-   Save your favorite cities [in process]
+
 ![Image alt](https://github.com/EugenWay/open-weather-app/raw/master/src/raw/app-screen.png)
 ![Image alt](https://github.com/EugenWay/open-weather-app/raw/master/src/raw/app-screen2.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
