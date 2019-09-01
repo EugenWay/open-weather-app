@@ -1,52 +1,25 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import "./App.css";
-import Hero from "./components/Hero.js";
-import WeatherDetails from "./components/WeatherDetails";
-import Form from "./components/Form";
+
+import Preloader from "./components/Preloader";
+import WeatherAppWrapper from "./components/WeatherAppWrapper";
+
 
 class App extends Component {
-    state = {
-        time: new Date().getHours(),
-        city: "",
-        temp: "",
-        temp_max: "",
-        temp_min: "",
-        humidity: "",
-        wind: "",
-        description: "",
-        icon: "",
-        fetching: true,
-        error: undefined
-    };
 
-    fetchWeatherData = async ({ city, ...geoData }) => {
-        const id = `90063b78cbe9ba03b7a25507256ba316`;
-        const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${id}`;
-
-        try {
-            const response = await fetch(url);
-            const waData = await response.json();
-
-            this.setState({
-                city,
-                temp: waData.main.temp,
-                temp_max: waData.main.temp_max,
-                temp_min: waData.main.temp_min,
-                humidity: waData.main.humidity,
-                wind: waData.wind.speed,
-                description: waData.weather[0].description,
-                icon: waData.weather[0].icon,
-                fetching: false
-            });
-        } catch (err) {
-            console.log(err);
-            return err;
+    constructor(props) {
+        super(props);
+        this.state = {
+            time: new Date().getHours(),
+            fetching: true
         }
-    };
+    }
 
-    customFeching = async event => {
-        event.preventDefault();
-        const city = event.target.elements.city.value;
+    fetchWeatherData = async (event, start_city) => {
+        event && event.preventDefault();
+
+        let city;
+        event ? city = event.target.elements.city.value : city = start_city;
 
         const id = `90063b78cbe9ba03b7a25507256ba316`;
         const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${id}`;
@@ -55,8 +28,6 @@ class App extends Component {
             const response = await fetch(url);
 
             const data = await response.json();
-
-            console.log(data);
 
             let utcTime = new Date().getUTCHours();
             let localTime = utcTime + data.timezone / 3600;
@@ -91,54 +62,22 @@ class App extends Component {
     };
 
     componentDidMount() {
-        this.fetchIP();
-    }
-
-    fetchIP = () => {
         const apiKey = `6fb5855a4485fc870344d7200a3747b1`;
 
         fetch(`http://api.ipstack.com/check?access_key=${apiKey}`)
             .then(response => response.json())
-            .then(data => this.fetchWeatherData(data))
+            .then(data => this.fetchWeatherData(null, data.city))
             .catch(error => error);
     };
 
     render() {
-        const {
-            time,
-            city,
-            temp,
-            temp_max,
-            temp_min,
-            wind,
-            humidity,
-            description,
-            icon,
-            fetching,
-            error
-        } = this.state;
+        let response;
+        this.state.fetching ? response = <Preloader time={this.state.time}/> :
+            response = <WeatherAppWrapper data={this.state} weatherMethod={this.fetchWeatherData}/>;
 
-        return fetching ? (
-            <section className="App-wrapper" data-bg={time}>
-                <div className="waiting">Loading...</div>
-            </section>
-        ) : (
-            <section className="App-wrapper" data-bg={time}>
-                <WeatherDetails
-                    city={city}
-                    temp={temp}
-                    temp_max={temp_max}
-                    temp_min={temp_min}
-                    description={description}
-                    icon={icon}
-                    wind={wind}
-                    humidity={humidity}
-                />
-                <Hero localtime={time} city={city} />
-                <Form weatherMetod={this.customFeching} error={error} />
-            </section>
-        );
+        return response;
     }
+
 }
 
 export default App;

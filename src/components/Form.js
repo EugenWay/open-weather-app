@@ -8,14 +8,14 @@ class Form extends React.Component {
 
         return (
             <section>
-                <form id="form" onSubmit={this.props.weatherMetod}>
+                <form id="form" onSubmit={this.props.weatherMethod}>
                     <input
                         type="text"
                         name="city"
                         placeholder="Paris, Moscow, New York etc..."
                         className="form-input"
                         required
-                    ></input>
+                    />
                     <button className="form-button">GO</button>
                 </form>
                 <div className="error-msg">{error}</div>
