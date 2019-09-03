@@ -1,8 +1,9 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 import WeatherDetails from "./WeatherDetails";
 import Hero from "./Hero";
 import Form from "./Form";
+import SeveCity from "./SaveCity";
 
 export default class WeatherAppWrapper extends Component {
     render() {
@@ -19,10 +20,15 @@ export default class WeatherAppWrapper extends Component {
                     icon={data.icon}
                     wind={data.wind}
                     humidity={data.humidity}
+                    bookmarks={data.bookmarks}
                 />
-                <Hero localtime={data.time} city={data.city}/>
-                <Form weatherMethod={this.props.weatherMethod} error={data.error}/>
+                <SeveCity saveCity={this.props.saveMethod} />
+                <Hero localtime={data.time} city={data.city} />
+                <Form
+                    weatherMethod={this.props.weatherMethod}
+                    error={data.error}
+                />
             </section>
-        )
+        );
     }
-};
+}

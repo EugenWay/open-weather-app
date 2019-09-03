@@ -120,6 +120,19 @@
     align-items: center;
     align-content: flex-start;
 }
+.weather-bookmarks {
+    padding: 20px;
+}
+.weather-bookmark-item {
+    font-size: 18px;
+    background: #ffff;
+    color: #333;
+    padding: 10px;
+    border-radius: 16px;
+    cursor: pointer;
+    margin: 5px;
+    display: inline-block;
+}
 
 .error-msg {
     padding: 10px;

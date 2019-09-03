@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 import tempRound from "../helpers/tempRound";
 
@@ -12,7 +12,8 @@ export default class WeatherDetails extends Component {
             description,
             icon,
             humidity,
-            wind
+            wind,
+            bookmarks
         } = this.props;
 
         return (
@@ -36,8 +37,16 @@ export default class WeatherDetails extends Component {
                     <div className="weather-details-item">hum: {humidity}%</div>
                     <div className="weather-details-item">wind: {wind} m/s</div>
                 </div>
+                <div className="weather-bookmarks">
+                    {bookmarks.map((bookmark, i) => {
+                        return (
+                            <span key={i} className="weather-bookmark-item">
+                                {bookmark}
+                            </span>
+                        );
+                    })}
+                </div>
             </section>
         );
     }
-};
-
+}
