@@ -86,8 +86,20 @@ class App extends Component {
         }
     };
 
-    deleteCity = () => {
-        console.log(`deleted`);
+    deleteCity = event => {
+        const city = event.target.dataset.city;
+        let citis = this.state.bookmarks;
+
+        const result = citis.filter(el => el.indexOf(city) === -1);
+        localStorage.citis = JSON.stringify(result);
+
+        this.setState(
+            {
+                bookmarks: result
+            },
+
+            console.log(`deleted ${city}`)
+        );
     };
 
     fetchByBookmarks = event => {
@@ -102,10 +114,7 @@ class App extends Component {
 
         fetch(`http://api.ipstack.com/check?access_key=${apiKey}`)
             .then(response => response.json())
-            .then(data => {
-                this.fetchWeatherData(null, data.city);
-                return data.city;
-            })
+            .then(data => this.fetchWeatherData(null, data.city))
             .catch(error => error);
     }
 

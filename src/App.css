@@ -90,7 +90,9 @@
 .form-button:hover {
     background: #dc732e;
 }
-
+.weather-details {
+    width: 900px;
+}
 .weather-details-temp {
     font-size: 100px;
     font-weight: 500;
@@ -121,21 +123,68 @@
     align-content: flex-start;
 }
 .weather-bookmarks {
-    padding: 20px;
+    padding: 20px 40px;
+    flex-wrap: wrap;
+    display: flex;
 }
 .weather-bookmark-item {
-    font-size: 18px;
-    background: #ffff;
-    color: #333;
-    padding: 10px;
-    border-radius: 16px;
+    padding: 10px 15px;
+    background-color: white;
+    color: #333333;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: flex-start;
+    border-radius: 30px;
+}
+.weather-bookmark-title {
     cursor: pointer;
-    margin: 5px;
-    display: inline-block;
+    font-size: 22px;
+}
+.weather-bookmark-delete {
+    margin-left: 15px;
+    font-weight: bold;
+    font-size: 30px;
+    width: 31px;
+    height: 31px;
+    line-height: 26px;
+    top: 0px;
+    position: relative;
+    transition: 0.3s;
+    cursor: pointer;
+    background: #dddd;
+    border-radius: 18px;
+}
+
+.weather-bookmark-delete:hover {
+    background: #cccccc;
 }
 
 .error-msg {
     padding: 10px;
     font-size: 17px;
     color: #ffffff;
+}
+
+.btn {
+    background: #f7904c;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+.btn:hover {
+    background: #de7a38;
 }
