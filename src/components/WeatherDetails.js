@@ -40,7 +40,12 @@ export default class WeatherDetails extends Component {
                 <div className="weather-bookmarks">
                     {bookmarks.map((bookmark, i) => {
                         return (
-                            <span key={i} className="weather-bookmark-item">
+                            <span
+                                key={i}
+                                className="weather-bookmark-item"
+                                onClick={this.props.bookmarkMethod}
+                                data-city={bookmark}
+                            >
                                 {bookmark}
                             </span>
                         );

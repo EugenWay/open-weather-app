@@ -21,6 +21,7 @@ export default class WeatherAppWrapper extends Component {
                     wind={data.wind}
                     humidity={data.humidity}
                     bookmarks={data.bookmarks}
+                    bookmarkMethod={this.props.bookmarkMethod}
                 />
                 <SeveCity saveCity={this.props.saveMethod} />
                 <Hero localtime={data.time} city={data.city} />

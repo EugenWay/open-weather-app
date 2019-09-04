@@ -69,16 +69,32 @@ class App extends Component {
     saveCity = () => {
         let citis = this.state.bookmarks;
 
-        citis.push(this.state.city);
+        if (citis.includes(this.state.city)) {
+            this.setState({
+                error: "City allready exists in bookmarks"
+            });
+        } else {
+            citis.push(this.state.city);
+            localStorage.citis = JSON.stringify(citis);
 
-        localStorage.citis = JSON.stringify(citis);
+            this.setState(
+                {
+                    bookmarks: citis
+                },
+                console.log(this.state.bookmarks)
+            );
+        }
+    };
 
-        this.setState(
-            {
-                bookmarks: citis
-            },
-            console.log(this.state.bookmarks)
-        );
+    deleteCity = () => {
+        console.log(`deleted`);
+    };
+
+    fetchByBookmarks = event => {
+        const city = event.target.dataset.city;
+        console.log(city);
+
+        this.fetchWeatherData(null, city);
     };
 
     componentDidMount() {
@@ -102,6 +118,8 @@ class App extends Component {
                       data={this.state}
                       weatherMethod={this.fetchWeatherData}
                       saveMethod={this.saveCity}
+                      bookmarkMethod={this.fetchByBookmarks}
+                      deleteMethod={this.deleteCity}
                   />
               ));
 
