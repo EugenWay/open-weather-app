@@ -3,6 +3,7 @@ import "./App.css";
 
 import Preloader from "./components/Preloader";
 import WeatherAppWrapper from "./components/WeatherAppWrapper";
+import env from "./settings";
 
 class App extends Component {
     constructor(props) {
@@ -26,8 +27,7 @@ class App extends Component {
         let city;
         event ? (city = event.target.elements.city.value) : (city = start_city);
 
-        const id = `90063b78cbe9ba03b7a25507256ba316`;
-        const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${id}`;
+        const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${env.weather_id}`;
 
         try {
             const response = await fetch(url);
@@ -110,9 +110,7 @@ class App extends Component {
     };
 
     componentDidMount() {
-        const apiKey = `6fb5855a4485fc870344d7200a3747b1`;
-
-        fetch(`http://api.ipstack.com/check?access_key=${apiKey}`)
+        fetch(`http://api.ipstack.com/check?access_key=${env.geoip_id}`)
             .then(response => response.json())
             .then(data => this.fetchWeatherData(null, data.city))
             .catch(error => error);

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import WeatherDetails from "./WeatherDetails";
 import Hero from "./Hero";
 import Form from "./Form";
-import SeveCity from "./SaveCity";
+import SaveCity from "./SaveCity";
 
 export default class WeatherAppWrapper extends Component {
     render() {
@@ -24,7 +24,7 @@ export default class WeatherAppWrapper extends Component {
                     bookmarkMethod={this.props.bookmarkMethod}
                     deleteMethod={this.props.deleteMethod}
                 />
-                <SeveCity saveCity={this.props.saveMethod} />
+                <SaveCity saveCity={this.props.saveMethod} />
                 <Hero localtime={data.time} city={data.city} />
                 <Form
                     weatherMethod={this.props.weatherMethod}

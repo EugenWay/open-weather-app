@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 export default class Hero extends Component {
     render() {
@@ -14,7 +14,6 @@ export default class Hero extends Component {
         }
 
         if (localtime >= 22 || (localtime >= 0 && localtime <= 4)) {
-            console.log(`wa are here`);
             welcome = "Good Night";
         }
 
@@ -29,4 +28,3 @@ export default class Hero extends Component {
         );
     }
 }
-
